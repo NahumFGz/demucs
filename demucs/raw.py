@@ -154,13 +154,13 @@ def main():
 
     args = parser.parse_args()
 
-    build_raw(musdb.DB(root=args.musdb, subsets=["train"], split="train"),
+    build_raw(musdb.DB(root=args.musdb, subsets=["train"], split="train", is_wav=True),
               args.destination / "train",
               normalize=True,
               channels=args.channels,
               samplerate=args.samplerate,
               workers=args.workers)
-    build_raw(musdb.DB(root=args.musdb, subsets=["train"], split="valid"),
+    build_raw(musdb.DB(root=args.musdb, subsets=["train"], split="valid", is_wav=True),
               args.destination / "valid",
               normalize=True,
               samplerate=args.samplerate,
