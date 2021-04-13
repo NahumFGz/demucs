@@ -60,7 +60,7 @@ class Remix(nn.Module):
     """
     Shuffle sources to make new mixes.
     """
-    def __init__(self, group_size=4):
+    def __init__(self, group_size=2):
         """
         Shuffle sources within one batch.
         Each batch is divided into groups of size `group_size` and shuffling is done within
@@ -79,6 +79,8 @@ class Remix(nn.Module):
         if self.training:
             group_size = self.group_size or batch
             if batch % group_size != 0:
+                print("batch", batch)
+                print("group_size", group_size)
                 raise ValueError(f"Batch size {batch} must be divisible by group size {group_size}")
             groups = batch // group_size
             wav = wav.view(groups, group_size, streams, channels, time)
